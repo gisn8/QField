@@ -137,6 +137,8 @@ bool QfPositioning::isSourceAvailable() const
 
 void QfPositioning::onApplicationStateChanged( Qt::ApplicationState state )
 {
+  qInfo() << "Positioning: application state" << state << "service mode" << mServiceMode;
+
 #if defined( Q_OS_ANDROID ) || defined( Q_OS_IOS )
   // Google Play policy only allows for background access if it's explicitly stated and justified
   // Not stopping on Activity::onPause is detected as violation
@@ -200,6 +202,7 @@ void QfPositioning::setActive( bool active )
       QLocationPermission locationPermission;
       locationPermission.setAccuracy( QLocationPermission::Precise );
       Qt::PermissionStatus permissionStatus = qApp->checkPermission( locationPermission );
+      qInfo() << "Positioning: location permission status" << permissionStatus;
 
       if ( permissionStatus == Qt::PermissionStatus::Undetermined )
       {

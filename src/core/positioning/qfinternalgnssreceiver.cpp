@@ -56,6 +56,7 @@ void QfInternalGnssReceiver::handleDisconnectDevice()
 {
   if ( mGeoPositionSource )
   {
+    qInfo() << "InternalGnssReceiver: stopping updates";
     mGeoPositionSource->stopUpdates();
     mLastGnssPositionValid = false;
     mActive = false;
@@ -76,6 +77,7 @@ void QfInternalGnssReceiver::handleConnectDevice()
     const QGeoPositionInfo satellitePosition = mGeoPositionSource->lastKnownPosition( true );
     mPreconnectSatellitePositionTimestamp = satellitePosition.isValid() ? satellitePosition.timestamp() : QDateTime();
 
+    qInfo() << "InternalGnssReceiver: starting updates";
     mGeoPositionSource->startUpdates();
     mActive = true;
   }
@@ -241,7 +243,7 @@ void QfInternalGnssReceiver::handleError( QGeoPositionInfoSource::Error position
     case QGeoPositionInfoSource::AccessError:
     case QGeoPositionInfoSource::ClosedError:
     {
-      qDebug() << positioningError;
+      qInfo() << "InternalGnssReceiver: error" << positioningError;
       break;
     }
 

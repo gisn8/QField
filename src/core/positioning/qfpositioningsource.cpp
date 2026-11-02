@@ -162,6 +162,7 @@ void QfPositioningSource::setBackgroundMode( bool backgroundMode )
     return;
 
   mBackgroundMode = backgroundMode;
+  qInfo() << "PositioningSource: background mode" << mBackgroundMode;
 
   if ( mBackgroundMode )
   {
@@ -233,6 +234,7 @@ QList<QfGnssPositionInformation> QfPositioningSource::getBackgroundPositionInfor
       file.close();
     }
   }
+  qInfo() << QStringLiteral( "PositioningSource: %1 positions collected in background" ).arg( positionInformationList.size() );
 
   return positionInformationList;
 }

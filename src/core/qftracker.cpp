@@ -434,7 +434,7 @@ void QfTracker::replayPositionInformationList( const QList<QfGnssPositionInforma
   }
 
   const qint64 endTime = QDateTime::currentMSecsSinceEpoch();
-  qInfo() << QStringLiteral( "Tracker position information replay duration: %1ms" ).arg( endTime - startTime ); // cppcheck-suppress [knownArgument,duplicateExpression]
+  qInfo() << QStringLiteral( "Tracker position information replay duration: %1ms, %2 positions, %3 vertices" ).arg( endTime - startTime ).arg( positionInformationList.size() ).arg( mRubberbandModel->vertexCount() ); // cppcheck-suppress [knownArgument,duplicateExpression]
 }
 
 void QfTracker::suspendUntilReplay()
