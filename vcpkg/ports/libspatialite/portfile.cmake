@@ -154,6 +154,13 @@ else()
     else()
         set(TARGET_ALIAS "")
     endif()
+
+    if(VCPKG_TARGET_IS_OSX)
+        set(FORCE_STATIC --enable-static --disable-shared)
+    else()
+        set(FORCE_STATIC "")
+    endif()
+
     vcpkg_make_configure(
         SOURCE_PATH "${SOURCE_PATH}"
         AUTORECONF
@@ -162,6 +169,7 @@ else()
             ${FREEXL_OPTION}
             ${GCP_OPTION}
             ${RTTOPO_OPTION}
+            ${FORCE_STATIC}
             "--disable-examples"
             "--disable-minizip"
             "cross_compiling=yes" # avoid conftest rpath trouble
